@@ -45,29 +45,29 @@ function decode(expr) {
     arr.push(letter);
     } 
   
-  let arrZeroOne = [];
-  for (let j = 0; j < arr.length; j++) {
-    for (let k = 0; k < arr[j].length; k++) {
-      if (arr[j][k] == 0) continue;
-      if ((arr[j][k] == 1) || (arr[j][k] === '*')) {
-      let letterZeroOne = arr[j].slice(k);
-      arrZeroOne.push(letterZeroOne);
+  let arrBinary = [];
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = 0; j < arr[i].length; j++) {
+      if (arr[i][j] == 0) continue;
+      if ((arr[i][j] == 1) || (arr[i][j] === '*')) {
+      let letterBinary = arr[i].slice(j);
+      arrBinary.push(letterBinary);
       break;
       }
     }
   }
 
   let arrMorse = [];
-  for (let n = 0; n < arrZeroOne.length; n++) {
+  for (let i = 0; i < arrBinary.length; i++) {
     let letterMorse = '';
-    for (let p = 0; p < arrZeroOne[n].length; p += 2) {
-      if (arrZeroOne[n][p] == 1 && ((arrZeroOne[n][p+1]) == 0)) {
+    for (let j = 0; j < arrBinary[i].length; j += 2) {
+      if (arrBinary[i][j] == 1 && ((arrBinary[i][j+1]) == 0)) {
       letterMorse += '.';
       }
-      if (arrZeroOne[n][p] == 1 && ((arrZeroOne[n][p+1]) == 1)) {
+      if (arrBinary[i][j] == 1 && ((arrBinary[i][j+1]) == 1)) {
       letterMorse += '-';
       }
-      if (arrZeroOne[n][p] == '*' && ((arrZeroOne[n][p+1]) == '*')) {
+      if (arrBinary[i][j] == '*' && ((arrBinary[i][j+1]) == '*')) {
         letterMorse += ' ';
         break;
         }
@@ -76,17 +76,17 @@ function decode(expr) {
   }
   
   let arrAlphabetic = [];
-  for (let m = 0; m < arrMorse.length; m++) {
-    if (arrMorse[m] != ' ') {
-    let letterAlphabetic = MORSE_TABLE[arrMorse[m]];
+  for (let i = 0; i < arrMorse.length; i++) {
+    if (arrMorse[i] != ' ') {
+    let letterAlphabetic = MORSE_TABLE[arrMorse[i]];
     arrAlphabetic.push(letterAlphabetic);
     }
-   else {
+    else {
     arrAlphabetic.push(' ')
     }
   }
-  let phrase = arrAlphabetic.join('');
-  return phrase;
+
+  return arrAlphabetic.join('');
   }
 
 module.exports = {
